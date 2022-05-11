@@ -1,12 +1,17 @@
 const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+
+let mainWindow;
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
+      contextIsolation: true,
+      enableRemoteModule: false,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
   if (app.isPackaged) {
@@ -14,6 +19,14 @@ function createWindow() {
   } else {
     mainWindow.loadURL("http://localhost:3000");
   }
+  ipcMain.on("getData", (event, args) => {
+    console.log("args", args);
+    // mainWindow.webContents.send(
+    //   "returnData",
+    //   "responding to your getData request"
+    // );
+    event.reply("returnData", "responding to your getData request");
+  });
 }
 
 app.whenReady().then(createWindow);
