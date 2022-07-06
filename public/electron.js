@@ -1,7 +1,10 @@
 const path = require("path");
 const { app, BrowserWindow, ipcMain } = require("electron");
+const fs = require("fs");
+var nodeConsole = require("console");
 
 let mainWindow;
+var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -20,12 +23,18 @@ function createWindow() {
     mainWindow.loadURL("http://localhost:3000");
   }
   ipcMain.on("getData", (event, args) => {
-    console.log("args", args);
+    myConsole.log("args", args);
     // mainWindow.webContents.send(
     //   "returnData",
     //   "responding to your getData request"
     // );
-    event.reply("returnData", "responding to your getData request");
+    const json = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../db/db.json"))
+    );
+    event.reply("returnData", json);
+  });
+  ipcMain.on("setData", (event, args) => {
+    myConsole.log(JSON.stringify(args));
   });
 }
 
