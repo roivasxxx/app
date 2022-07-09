@@ -2,6 +2,7 @@ const path = require("path");
 const { app, BrowserWindow, ipcMain } = require("electron");
 const fs = require("fs");
 var nodeConsole = require("console");
+const { handleData } = require("./db/db_handler");
 
 let mainWindow;
 var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
@@ -14,7 +15,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       enableRemoteModule: false,
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "/db/preload.js"),
     },
   });
   if (app.isPackaged) {
@@ -34,7 +35,7 @@ function createWindow() {
     event.reply("returnData", json);
   });
   ipcMain.on("setData", (event, args) => {
-    myConsole.log(JSON.stringify(args));
+    handleData(args);
   });
 }
 
