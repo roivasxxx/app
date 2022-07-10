@@ -7,8 +7,7 @@ const { handleData } = require("./db/db_handler");
 let mainWindow;
 var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
 
-
-async function createWindow() {
+function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -36,8 +35,8 @@ async function createWindow() {
     event.reply("returnData", json);
   });
   ipcMain.on("setData", (event, args) => {
-      await handleData(args)
-    })
+    handleData(args);
+  });
 }
 
 app.whenReady().then(createWindow);

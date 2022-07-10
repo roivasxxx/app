@@ -11,14 +11,22 @@ function App() {
   }, []);
   function handleClick(type) {
     if (type === 0) window.electron.get("getData", "sending data from React");
-    else if (type === 1)
+    else if (type === 1) {
+      // window.electron.set([
+      //   {
+      //     action: "addNew",
+      //     collection: "tasks",
+      //     data: [{ date: new Date(), desc: "test" }],
+      //   },
+      // ]);
       window.electron.set([
         {
-          action: "addNew",
+          action: "update",
           collection: "tasks",
-          data: [{ date: new Date(), desc: "test" }],
+          data: [{ date: new Date(), desc: "testing update function", id: 3 }],
         },
       ]);
+    }
     //console.log("Return value in react: ", returnValue);
   }
 

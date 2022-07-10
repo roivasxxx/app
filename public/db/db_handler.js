@@ -48,18 +48,18 @@ const processData = (req, data) => {
         case "addNew":
           const colData = temp.data;
           for (let j = 0; j < colData.length; j++) {
-            data[srcCol].push({ ...colData[j], id: req.length + j });
+            data[srcCol].push({ ...colData[j], id: data[srcCol].length + j });
           }
           break;
         case "delete":
-          data[srcCol] = srcCol.filter(
+          data[srcCol] = data[srcCol].filter(
             (entry) => !temp.data.includes(entry.id)
           );
           break;
         case "update":
           const ids = temp.data.map((entry) => entry.id);
-          data[srcCol] = srcCol.map((entry) => {
-            if (ids.includes(entry)) {
+          data[srcCol] = data[srcCol].map((entry) => {
+            if (ids.includes(entry.id)) {
               const newData = temp.data.find((el) => el.id === entry.id);
               return newData;
             }
