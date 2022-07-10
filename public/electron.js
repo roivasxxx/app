@@ -34,8 +34,9 @@ function createWindow() {
     );
     event.reply("returnData", json);
   });
-  ipcMain.on("setData", (event, args) => {
-    handleData(args);
+  ipcMain.on("setData", async (event, args) => {
+    const writeResult = await handleData(args);
+    event.reply("returnData", writeResult);
   });
 }
 

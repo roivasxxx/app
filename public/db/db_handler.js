@@ -22,7 +22,10 @@ exports.handleData = async (req) => {
     const updatedDbData = processData(req, currentDbData);
     myConsole.log("Updated db data");
     const writeResult = await writeToDb(updatedDbData);
-    if (writeResult) myConsole.log("Write result: ", writeResult);
+    if (writeResult) {
+      myConsole.log("Write result: ", writeResult);
+      return updatedDbData;
+    }
   } catch (error) {
     myConsole.error("Error while handling data: ", error);
     if (error === ERRORS.DB_FILE_NOT_FOUND) {
@@ -30,6 +33,7 @@ exports.handleData = async (req) => {
       const result = await createFile();
       if (result) {
         myConsole.log("Created db file!");
+        return JSON.parse(DEFAULT_DB);
       }
     } else if (error === ERRORS.CORRUPTED_JSON) {
       console.error("Corrupted db.json file!");
@@ -44,11 +48,17 @@ const processData = (req, data) => {
       const temp = req[i];
       let actionType = temp.action;
       const srcCol = temp.collection;
+      const srcColLen = data[srcCol].length;
+      const lastColEl =
+        srcColLen > 0 ? Math.max(...data[srcCol].map((el) => el.id)) + 1 : 0;
       switch (actionType) {
         case "addNew":
           const colData = temp.data;
           for (let j = 0; j < colData.length; j++) {
-            data[srcCol].push({ ...colData[j], id: data[srcCol].length + j });
+            data[srcCol].push({
+              ...colData[j],
+              id: lastColEl + j,
+            });
           }
           break;
         case "delete":
