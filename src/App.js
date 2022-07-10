@@ -41,8 +41,8 @@ function App() {
 
   return (
     <HashRouter>
-      <Router />
-      <div className="App">
+      <div className="App bg-gray-600 w-full h-full">
+        <Router />
         <div className="flex">
           <h1 className="text-purple-700">Hello react</h1>
           <h1>Test</h1>
