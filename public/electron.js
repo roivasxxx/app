@@ -24,7 +24,6 @@ function createWindow() {
         mainWindow.loadURL('http://localhost:3000')
     }
     ipcMain.on('getData', (event, args) => {
-        myConsole.log('args', args)
         // mainWindow.webContents.send(
         //   "returnData",
         //   "responding to your getData request"

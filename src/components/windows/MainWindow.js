@@ -39,7 +39,7 @@ export default function MainWindow({}) {
     return (
         <div className="App bg-gray-600 w-full h-full">
             <Router />
-            {console.log('Provider data: ', tasks, notes)}
+            {console.log('Provider data - tasks:  ', tasks, ' notes: ', notes)}
             <div className="flex">
                 <h1 className="text-purple-700">Hello react</h1>
                 <h1>Test</h1>
@@ -61,7 +61,7 @@ export default function MainWindow({}) {
                     dispatch({
                         type: 'ADD',
                         collection: 'notes',
-                        data: { desc: 'asdasd', date: new Date(), id: 1 },
+                        data: { desc: 'asdasd', date: new Date() },
                     })
                 }
             >
