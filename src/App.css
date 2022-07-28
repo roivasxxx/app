@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 } */
+
+.no_drag {
+    -webkit-app-region: no-drag;
+}
