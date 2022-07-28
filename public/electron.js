@@ -38,6 +38,20 @@ function createWindow() {
         const writeResult = await handleData(args)
         event.reply('returnData', writeResult)
     })
+    ipcMain.on('performWindowAction', (event, args) => {
+        switch (args) {
+            case 'minify':
+                mainWindow.minimize()
+                break
+            case 'close':
+                mainWindow.close()
+                break
+            case 'maximize':
+                mainWindow.maximize()
+                app.quit()
+                break
+        }
+    })
 }
 
 app.whenReady().then(createWindow)
