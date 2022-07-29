@@ -37,36 +37,11 @@ export default function MainWindow({}) {
     }
 
     return (
-        <div className="App bg-gray-600 w-full h-full">
+        <div
+            className="App bg-gray-600 "
+            style={{ height: '100%', width: '100%' }}
+        >
             <Router />
-            {console.log('Provider data - tasks:  ', tasks, ' notes: ', notes)}
-            <div className="flex">
-                <h1 className="text-purple-700">Hello react</h1>
-                <h1>Test</h1>
-                <h1>Test2</h1>
-                <button onClick={() => handleClick(0)}>Get data </button>
-            </div>
-            <label>
-                Text:
-                <input
-                    type="text"
-                    name="text"
-                    onChange={(e) => setMessage(e.target.value)}
-                />
-            </label>
-            <button onClick={() => handleClick(1)}>Write data </button>
-            <h2>{JSON.stringify(text)}</h2>
-            <button
-                onClick={() =>
-                    dispatch({
-                        type: 'ADD',
-                        collection: 'notes',
-                        data: { desc: 'asdasd', date: new Date() },
-                    })
-                }
-            >
-                Dispatcher test
-            </button>
         </div>
     )
 }
