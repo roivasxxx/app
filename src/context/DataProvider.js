@@ -15,10 +15,11 @@ export default function ContextProvider(props) {
     const disp = (dispProps) => {
         dispatch(dispProps)
     }
+
     useEffect(() => {
-        window.electron.get()
-        window.electron.sendBack('returnData', (data) =>
-            disp({ type: 'INIT', data })
+        window.electron.init()
+        window.electron.sendBack('returnData', (sendback) =>
+            disp({ type: sendback.action, data: sendback.data })
         )
     }, [])
 

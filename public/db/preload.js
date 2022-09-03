@@ -4,12 +4,13 @@ var nodeConsole = require('console')
 var myConsole = new nodeConsole.Console(process.stdout, process.stderr)
 
 contextBridge.exposeInMainWorld('electron', {
-    get: (channel, data) => {
+    init: (channel, data) => {
+        myConsole.log('INIT APP')
         ipcRenderer.send('getData', data)
     },
     sendBack: (channel, func) => {
         ipcRenderer.on('returnData', (event, data) => {
-            myConsole.log('SEND BACK!!!')
+            //myConsole.log('SEND BACK!!!')
             console.log('SEND BACK!!!')
             func(data)
         })
@@ -17,6 +18,9 @@ contextBridge.exposeInMainWorld('electron', {
     },
     set: (actions) => {
         ipcRenderer.send('setData', actions)
+    },
+    test: (actions) => {
+        ipcRenderer.send('test', actions)
     },
     db: {
         get(message, data) {

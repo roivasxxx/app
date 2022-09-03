@@ -10,7 +10,7 @@ export default function TodoItem({ task }) {
         >
             <div className={`w-2/12`}>{formatDate(task.date)}</div>
             <div className="w-9/12 text-start">{task.desc}</div>
-            <button class="group w-1/12  ">
+            <button className="group w-1/12  ">
                 <div className="invisible group-hover:visible">X</div>
             </button>
         </div>

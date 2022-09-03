@@ -1,30 +1,37 @@
 const Reducer = (state, action) => {
     const { collection, data, id } = action
 
-    let newState = { ...state }
+    // let newState = { ...state }
 
     switch (action.type) {
         case 'ADD':
-            window.electron.set([
+            window.electron.test([
                 {
                     action: 'addNew',
                     collection: 'tasks',
                     data: [data],
                 },
             ])
+            console.debug('ADD')
             break
         case 'DELETE':
-            newState[collection] = newState[collection].filter(
-                (el) => el.id !== id
-            )
+            window.electron.set([
+                {
+                    action: 'delete',
+                    collection: 'tasks',
+                    data: [data],
+                },
+            ])
             break
-        case 'INIT':
-            console.info('INIT REDUCER')
-            return action.data
+        case 'TEST':
+            console.debug('TEST')
+            break
         default:
+            console.info('DEFAULT ACTION')
+            return action.data
     }
 
-    return newState
+    return state
 }
 
 export { Reducer }

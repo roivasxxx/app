@@ -32,12 +32,20 @@ function createWindow() {
         const json = JSON.parse(
             fs.readFileSync(path.join(__dirname, '../db/db.json'))
         )
-        event.reply('returnData', json)
+        event.reply('returnData', { action: 'INIT', data: json })
     })
     ipcMain.on('setData', async (event, args) => {
         const writeResult = await handleData(args)
-        event.reply('returnData', writeResult)
+        event.reply('returnData', {
+            data: writeResult,
+            action: 'ACTION_FINISH',
+        })
     })
+    ipcMain.on('test', async (event, args) => {
+        myConsole.log('TESTING ELECTRON: ', args)
+        event.reply('returnData', { data: null, action: 'TEST' })
+    })
+
     ipcMain.on('performWindowAction', (event, args) => {
         switch (args) {
             case 'minify':
