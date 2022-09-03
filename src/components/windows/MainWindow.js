@@ -38,7 +38,8 @@ export default function MainWindow({}) {
 
     return (
         <div
-            className="App bg-gray-600 "
+            className="App bg-gray-600 
+            "
             style={{ height: '100%', width: '100%' }}
         >
             <Router />

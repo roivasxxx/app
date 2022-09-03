@@ -45,10 +45,11 @@ function createWindow() {
                 break
             case 'close':
                 mainWindow.close()
+                app.quit()
                 break
             case 'maximize':
                 mainWindow.maximize()
-                app.quit()
+
                 break
         }
     })

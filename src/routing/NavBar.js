@@ -43,18 +43,20 @@ const OutletWrapper = () => (
 
 export default function NavBar() {
     return (
-        <div>
-            <div>
-                <div className="no_drag flex row justify-around items-center bg-gray-600">
-                    <Link to="/">
-                        <h2 className={textStyle}>Home</h2>
-                    </Link>
-                    <Link to="/todo">
-                        <h2 className={textStyle}>To-do</h2>
-                    </Link>
-                    <Link to="/notes">
-                        <h2 className={textStyle}>Notes</h2>
-                    </Link>
+        <div className="w-full">
+            <div className="mb-2">
+                <div className="m-auto flex row justify-between border-b-2 border-purple-300">
+                    <div className="no_drag w-10/12 flex row justify-around items-center bg-gray-600">
+                        <Link to="/">
+                            <h2 className={textStyle}>Home</h2>
+                        </Link>
+                        <Link to="/todo">
+                            <h2 className={textStyle}>To-do</h2>
+                        </Link>
+                        <Link to="/notes">
+                            <h2 className={textStyle}>Notes</h2>
+                        </Link>
+                    </div>
                     <FrameActionBar />
                 </div>
             </div>
