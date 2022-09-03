@@ -46,7 +46,7 @@ export default function NavBar() {
         <div className="w-full">
             <div className="mb-2">
                 <div className="m-auto flex row justify-between border-b-2 border-purple-300">
-                    <div className="no_drag w-10/12 flex row justify-around items-center bg-gray-600">
+                    <div className="no_drag m-2 w-10/12 flex row justify-around items-center bg-gray-600">
                         <Link to="/">
                             <h2 className={textStyle}>Home</h2>
                         </Link>
